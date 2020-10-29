@@ -39,7 +39,7 @@ public class Main extends Application {
     nagusiaKud = loaderKautotu.getController();
     nagusiaKud.setMainApp(this);
 
-    FXMLLoader loaderMain = new FXMLLoader(getClass().getResource("/EzarpenakUI.fxml"));
+    FXMLLoader loaderMain = new FXMLLoader(getClass().getResource("/HerrialdeakUI.fxml"));
     ezarpenakUI = (Parent) loaderMain.load();
     herrialdeakKud = loaderMain.getController();
     herrialdeakKud.setMainApp(this);
@@ -53,6 +53,5 @@ public class Main extends Application {
   public void ezarpenakErakutsi() {
     stage.setScene(new Scene(ezarpenakUI));
     stage.show();
-    herrialdeakKud.getEzarpenak();
   }
 }

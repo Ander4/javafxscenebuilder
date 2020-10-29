@@ -1,7 +1,7 @@
 package ehu.isad.controller.ui;
 
 import ehu.isad.Main;
-import ehu.isad.controller.db.EzarpenakDBKud;
+import ehu.isad.controller.db.EurobisioaDBKud;
 import ehu.isad.model.Herrialde;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -9,7 +9,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.TextArea;
 import javafx.util.StringConverter;
 
 import java.net.URL;
@@ -50,12 +49,9 @@ public class HerrialdeakKud implements Initializable {
 
     this.comboDatuak();
 
+    List<Herrialde> herrialdeak = EurobisioaDBKud.getInstantzia().lortuHerrialdeak();
     ObservableList<Herrialde> books = FXCollections.observableArrayList();
-    books.addAll(
-            new Book("1491910399", "R for Data Science"),
-            new Book("1491946008", "Fluent Python"),
-            new Book("9781491906187", "Data Algorithms")
-    );
+    books.addAll(herrialdeak);
     comboHerrialde.setItems(books);
     comboHerrialde.setEditable(false);
 

@@ -7,19 +7,19 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EzarpenakDBKud {
+public class EurobisioaDBKud {
 
   // singleton patroia
 
-  private static EzarpenakDBKud instantzia = new EzarpenakDBKud();
+  private static EurobisioaDBKud instantzia = new EurobisioaDBKud();
 
-  public static EzarpenakDBKud getInstantzia(){
+  public static EurobisioaDBKud getInstantzia(){
       return instantzia;
   };
 
-  private EzarpenakDBKud (){}
+  private EurobisioaDBKud(){}
 
-  public List<Herrialde> lortuEzarpenak(){
+  public List<Herrialde> lortuHerrialdeak(){
 
     List<Herrialde> emaitza = new ArrayList<>();
     DBKudeatzaile dbkud = DBKudeatzaile.getInstantzia();
@@ -34,8 +34,8 @@ public class EzarpenakDBKud {
         String bandera = rs.getString("bandera");
         String tv = rs.getString("tv");
 
-        Herrialde ezarpena = new Herrialde(izena,bandera,tv);
-        emaitza.add(ezarpena);
+        Herrialde herrialdea = new Herrialde(izena,bandera,tv);
+        emaitza.add(herrialdea);
       }
     }catch (SQLException e){
       System.err.println(e);
