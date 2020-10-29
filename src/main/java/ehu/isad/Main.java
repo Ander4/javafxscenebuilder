@@ -1,7 +1,7 @@
 package ehu.isad;
 
 import ehu.isad.controller.ui.NagusiaKud;
-import ehu.isad.controller.ui.EzarpenakKud;
+import ehu.isad.controller.ui.HerrialdeakKud;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -18,7 +18,7 @@ public class Main extends Application {
   private Stage stage;
 
   private NagusiaKud nagusiaKud;
-  private EzarpenakKud ezarpenakKud;
+  private HerrialdeakKud herrialdeakKud;
 
 
   @Override
@@ -41,8 +41,8 @@ public class Main extends Application {
 
     FXMLLoader loaderMain = new FXMLLoader(getClass().getResource("/EzarpenakUI.fxml"));
     ezarpenakUI = (Parent) loaderMain.load();
-    ezarpenakKud = loaderMain.getController();
-    ezarpenakKud.setMainApp(this);
+    herrialdeakKud = loaderMain.getController();
+    herrialdeakKud.setMainApp(this);
   }
 
 
@@ -53,6 +53,6 @@ public class Main extends Application {
   public void ezarpenakErakutsi() {
     stage.setScene(new Scene(ezarpenakUI));
     stage.show();
-    ezarpenakKud.getEzarpenak();
+    herrialdeakKud.getEzarpenak();
   }
 }
