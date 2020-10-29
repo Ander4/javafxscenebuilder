@@ -4,15 +4,18 @@ import ehu.isad.Main;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class NagusiaKud implements Initializable {
+public class HasieraKud implements Initializable {
 
   // Reference to the main application.
   private Main mainApp;
 
+  @FXML
+  private Button bozkatuBotoia;
 
   public void setMainApp(Main main) {
     this.mainApp = main;
@@ -22,7 +25,7 @@ public class NagusiaKud implements Initializable {
   public void onClick(ActionEvent actionEvent) {
 
 
-      mainApp.ezarpenakErakutsi();
+      mainApp.herrialdeakErakutsi();
 
   }
 

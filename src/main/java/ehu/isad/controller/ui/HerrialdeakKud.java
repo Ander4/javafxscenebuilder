@@ -8,6 +8,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.util.StringConverter;
 
@@ -23,8 +24,11 @@ public class HerrialdeakKud implements Initializable {
   @FXML
   private ComboBox<Herrialde> comboHerrialde;
 
+  @FXML
+  private Button OKbtn;
+
   public void setMainApp(Main main) {
-    this.mainApp = mainApp;
+    this.mainApp = main;
   }
 
   private void comboDatuak(){
@@ -59,6 +63,10 @@ public class HerrialdeakKud implements Initializable {
 
   @FXML
   public void onClick(ActionEvent actionEvent) {
+
+    Herrialde herri =comboHerrialde.getValue();
+    mainApp.setHerrialde(herri);
+    mainApp.erroreaErakutsi();
 
   }
 
