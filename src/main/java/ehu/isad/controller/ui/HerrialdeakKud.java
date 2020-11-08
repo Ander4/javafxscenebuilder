@@ -1,6 +1,7 @@
 package ehu.isad.controller.ui;
 
 import ehu.isad.Main;
+import ehu.isad.controller.db.BozkaketaDBKud;
 import ehu.isad.controller.db.EurobisioaDBKud;
 import ehu.isad.model.Herrialde;
 import javafx.collections.FXCollections;
@@ -13,10 +14,11 @@ import javafx.scene.control.ComboBox;
 import javafx.util.StringConverter;
 
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class HerrialdeakKud implements Initializable {
+public class HerrialdeakKud implements Kudeatzaile {
 
   // Reference to the main application.
   private Main mainApp;
@@ -62,11 +64,18 @@ public class HerrialdeakKud implements Initializable {
   }
 
   @FXML
-  public void onClick(ActionEvent actionEvent) {
+  public void onClick(ActionEvent actionEvent) throws SQLException {
 
     Herrialde herri =comboHerrialde.getValue();
     mainApp.setHerrialde(herri);
-    mainApp.erroreaErakutsi();
+    String bandera = BozkaketaDBKud.getInstantzia().bozkatuDu(herri.getIzena());
+    if (bandera == "") {
+
+      mainApp.bozkaketaErakutsi();
+
+    }else {
+      mainApp.erroreaErakutsi();
+    }
 
   }
 

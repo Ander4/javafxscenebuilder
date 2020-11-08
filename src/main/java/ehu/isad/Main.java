@@ -1,8 +1,6 @@
 package ehu.isad;
 
-import ehu.isad.controller.ui.ErroreaKud;
-import ehu.isad.controller.ui.HasieraKud;
-import ehu.isad.controller.ui.HerrialdeakKud;
+import ehu.isad.controller.ui.*;
 import ehu.isad.model.Herrialde;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -17,17 +15,23 @@ public class Main extends Application {
   private Parent hasieraUI;
   private Parent herrialdeakUI;
   private Parent erroreaUI;
+  private Parent bozkaketaUI;
+  private Parent top3UI;
 
   private Stage stage;
 
   private HasieraKud hasieraKud;
   private HerrialdeakKud herrialdeakKud;
   private ErroreaKud erroreakKud;
+  private BozkaketaKud bozkaketaKud;
+  private Top3Kud top3Kud;
 
   private Herrialde herrialdea;
   private Scene sceneHasiera;
   private Scene sceneHerri;
   private Scene sceneErrore;
+  private Scene sceneBozkaketa;
+  private Scene sceneTop3;
 
 
   @Override
@@ -40,6 +44,8 @@ public class Main extends Application {
     stage.setScene(sceneHasiera);
     stage.show();
   }
+
+  //private Parent kargatu(String fxml, )
 
   private void pantailakKargatu() throws IOException {
 
@@ -60,6 +66,18 @@ public class Main extends Application {
     sceneErrore = new Scene(erroreaUI,600,450);
     erroreakKud = loaderErrore.getController();
     erroreakKud.setMainApp(this);
+
+    FXMLLoader loaderBozkatu = new FXMLLoader(getClass().getResource("/BazkaketaUI.fxml"));
+    bozkaketaUI = (Parent) loaderBozkatu.load();
+    sceneBozkaketa = new Scene(bozkaketaUI,600,450);
+    bozkaketaKud = loaderBozkatu.getController();
+    bozkaketaKud.setMainApp(this);
+
+    FXMLLoader loaderTop3 = new FXMLLoader(getClass().getResource("/Top3UI.fxml"));
+    top3UI = (Parent) loaderTop3.load();
+    sceneTop3 = new Scene(top3UI,600,450);
+    top3Kud = loaderTop3.getController();
+    top3Kud.setMainApp(this);
   }
 
   public void setHerrialde(Herrialde herri){
@@ -89,5 +107,14 @@ public class Main extends Application {
     stage.show();
   }
 
+  public void bozkaketaErakutsi() {
+    stage.setScene(sceneBozkaketa);
+    stage.show();
+  }
+
+  public void Top3Erakutsi() {
+    stage.setScene(sceneTop3);
+    stage.show();
+  }
 
 }

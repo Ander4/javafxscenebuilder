@@ -9,7 +9,7 @@ import javafx.scene.control.Button;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class HasieraKud implements Initializable {
+public class HasieraKud implements Kudeatzaile {
 
   // Reference to the main application.
   private Main mainApp;
