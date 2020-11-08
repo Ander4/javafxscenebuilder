@@ -60,5 +60,22 @@ public class BozkaketaDBKud {
         return emaitza;
 
     }
+    public void puntuakSartu(String nork, String nori, int puntu){
+
+        DBKudeatzaile dbkud = DBKudeatzaile.getInstantzia();
+
+        String query = "INSERT into Bozkaketa VALUES('"+nori+"', '"+nork+"', 2019, "+puntu+")";
+        ResultSet rs = dbkud.execSQL(query);
+
+    }
+
+    public void orezkaritzaAktualizatu(String herrialdea, int zenbat){
+
+        DBKudeatzaile dbkud = DBKudeatzaile.getInstantzia();
+
+        String query = "UPDATE Ordezkaritza SET puntuak=puntuak+"+zenbat+" WHERE herrialdea='"+herrialdea+"'";
+        ResultSet rs = dbkud.execSQL(query);
+
+    }
 
 }

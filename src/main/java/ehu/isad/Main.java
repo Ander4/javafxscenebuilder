@@ -108,11 +108,13 @@ public class Main extends Application {
   }
 
   public void bozkaketaErakutsi() {
+    bozkaketaKud.setBozkatzailea(this.herrialdea.getIzena());
     stage.setScene(sceneBozkaketa);
     stage.show();
   }
 
   public void Top3Erakutsi() {
+    top3Kud.hasieratu();
     stage.setScene(sceneTop3);
     stage.show();
   }

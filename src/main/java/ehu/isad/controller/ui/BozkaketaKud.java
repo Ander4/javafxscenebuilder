@@ -5,6 +5,7 @@ import java.util.ResourceBundle;
 
 import ehu.isad.Main;
 import ehu.isad.controller.db.BozkaketaDBKud;
+import ehu.isad.model.Herrialde;
 import ehu.isad.model.HerrialdeaBozkatu;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -25,6 +26,10 @@ import javafx.util.converter.IntegerStringConverter;
 public class BozkaketaKud implements Kudeatzaile {
 
     private Main mainApp;
+
+    private String bozkatzaile;
+
+    private int emandakoPunt;
 
     @FXML
     private ResourceBundle resources;
@@ -58,7 +63,13 @@ public class BozkaketaKud implements Kudeatzaile {
     @FXML
     void onGorde(ActionEvent event) {
 
-        mainApp.Top3Erakutsi();
+        if (emandakoPunt == 5) {
+            mainApp.Top3Erakutsi();
+        }else{
+
+            System.out.println("Ez dituzu 5 puntu banatu");
+
+        }
 
     }
 
@@ -66,6 +77,12 @@ public class BozkaketaKud implements Kudeatzaile {
     public void setMainApp(Main main) {
 
         this.mainApp = main;
+
+    }
+
+    public void setBozkatzailea(String herri){
+
+        this.bozkatzaile=herri;
 
     }
 
@@ -98,7 +115,7 @@ public class BozkaketaKud implements Kudeatzaile {
 
             cell.setOnMouseClicked(event -> {
                 if (!cell.isEmpty()) {
-                    if (cell.getTableView().getSelectionModel().getSelectedItem().getHerrialdea().equals("Alemania")) {
+                    if (cell.getTableView().getSelectionModel().getSelectedItem().getHerrialdea().equals(this.bozkatzaile)) {
                         cell.setEditable(false);
                     } else {
                         cell.setEditable(true);
@@ -114,9 +131,16 @@ public class BozkaketaKud implements Kudeatzaile {
                 t -> {
                     t.getTableView().getItems().get(t.getTablePosition().getRow())
                             .setPuntoak(t.getNewValue());
-                    //datubasea aktualizatu
+                    int zenbat = t.getTableView().getItems().get(t.getTablePosition().getRow())
+                            .getPuntoak();
+                    if (zenbat <= 5 && zenbat+emandakoPunt <=5){
 
+                        String nori= t.getTableView().getItems().get(t.getTablePosition().getRow()).getHerrialdea();
+                        BozkaketaDBKud.getInstantzia().puntuakSartu(this.bozkatzaile,nori,zenbat );
+                        emandakoPunt = emandakoPunt+zenbat;
+                        BozkaketaDBKud.getInstantzia().orezkaritzaAktualizatu(nori, zenbat);
 
+                    }
                 }
         );
 
@@ -126,8 +150,6 @@ public class BozkaketaKud implements Kudeatzaile {
             public void updateItem(Image image, boolean empty) {
                 if (image != null && !empty) {
                     final ImageView imageview = new ImageView();
-                    imageview.setFitHeight(50);
-                    imageview.setFitWidth(50);
                     imageview.setImage(image);
                     setGraphic(imageview);
                     setAlignment(Pos.CENTER);

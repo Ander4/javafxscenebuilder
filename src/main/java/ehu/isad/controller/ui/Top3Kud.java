@@ -121,8 +121,7 @@ public class Top3Kud implements Kudeatzaile{
 
     }
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
+    public void hasieratu(){
 
         setTop1();
         setTop2();
@@ -130,6 +129,18 @@ public class Top3Kud implements Kudeatzaile{
         setBanderaTop1();
         setBanderaTop2();
         setBanderaTop3();
+
+    }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+
+//        setTop1();
+//        setTop2();
+//        setTop3();
+//        setBanderaTop1();
+//        setBanderaTop2();
+//        setBanderaTop3();
 
     }
 }

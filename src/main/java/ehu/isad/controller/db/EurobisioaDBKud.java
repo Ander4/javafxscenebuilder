@@ -45,9 +45,4 @@ public class EurobisioaDBKud {
     return emaitza;
   }
 
-  public void eguneratu() {
-    DBKudeatzaile dbkud = DBKudeatzaile.getInstantzia();
-    dbkud.execSQL("INSERT INTO properties ('userid', 'key', 'value') values ('5','6','7')");
-
-  }
 }

@@ -31,7 +31,7 @@ public class ErroreaKud implements Initializable {
     @FXML
     void onClick(ActionEvent event) {
 
-        mainApp.hasieraErakutsi();
+        mainApp.Top3Erakutsi();
 
     }
 
