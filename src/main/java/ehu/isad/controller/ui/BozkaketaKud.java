@@ -1,10 +1,13 @@
 package ehu.isad.controller.ui;
 
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import ehu.isad.Main;
 import ehu.isad.controller.db.BozkaketaDBKud;
+import ehu.isad.model.BozkaketaAux;
 import ehu.isad.model.Herrialde;
 import ehu.isad.model.HerrialdeaBozkatu;
 import javafx.collections.FXCollections;
@@ -29,7 +32,7 @@ public class BozkaketaKud implements Kudeatzaile {
 
     private String bozkatzaile;
 
-    private int emandakoPunt;
+    private List<BozkaketaAux> bozkatuLista = new ArrayList<BozkaketaAux>();
 
     @FXML
     private ResourceBundle resources;
@@ -63,11 +66,26 @@ public class BozkaketaKud implements Kudeatzaile {
     @FXML
     void onGorde(ActionEvent event) {
 
-        if (emandakoPunt == 5) {
-            mainApp.Top3Erakutsi();
-        }else{
+//        if (emandakoPunt == 5) {
+//            mainApp.Top3Erakutsi();
+//        }else{
+//
+//            System.out.println("Ez dituzu 5 puntu banatu");
+//
+//        }
 
-            System.out.println("Ez dituzu 5 puntu banatu");
+        int i = 0;
+        int puntuak = 0;
+        while (i<tblBoto.getItems().size()){
+
+            HerrialdeaBozkatu herrialdea = tblBoto.getItems().get(i);
+            puntuak = puntuak + herrialdea.getPuntoak();
+            i++;
+        }
+        if (puntuak ==5){
+
+            this.sartuDB();
+            mainApp.Top3Erakutsi();
 
         }
 
@@ -126,23 +144,7 @@ public class BozkaketaKud implements Kudeatzaile {
             return cell;
         });
 
-
-        puntuCol.setOnEditCommit(
-                t -> {
-                    t.getTableView().getItems().get(t.getTablePosition().getRow())
-                            .setPuntoak(t.getNewValue());
-                    int zenbat = t.getTableView().getItems().get(t.getTablePosition().getRow())
-                            .getPuntoak();
-                    if (zenbat <= 5 && zenbat+emandakoPunt <=5){
-
-                        String nori= t.getTableView().getItems().get(t.getTablePosition().getRow()).getHerrialdea();
-                        BozkaketaDBKud.getInstantzia().puntuakSartu(this.bozkatzaile,nori,zenbat );
-                        emandakoPunt = emandakoPunt+zenbat;
-                        BozkaketaDBKud.getInstantzia().orezkaritzaAktualizatu(nori, zenbat);
-
-                    }
-                }
-        );
+        this.bozkaketa(this.bozkatzaile);
 
         banderaCol.setCellValueFactory(new PropertyValueFactory<HerrialdeaBozkatu, Image>("bandera"));
 
@@ -161,5 +163,62 @@ public class BozkaketaKud implements Kudeatzaile {
             };
         });
         tblBoto.setItems(herrialdeBozkatuak);
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////////
+    private void bozkaketa(String nork){
+        puntuCol.setOnEditCommit(
+                t -> {
+                    String  nori = t.getTableView().getSelectionModel().getSelectedItem().getHerrialdea();
+
+                    if ( ! nori.equals(nork)) {
+                        t.getTableView().getItems().get(t.getTablePosition().getRow())
+                                .setPuntoak(t.getNewValue());
+
+                        Integer puntua = t.getTableView().getItems().get(t.getTablePosition().getRow()).getPuntoak();
+                        if (listanDago(nori)!=null){
+
+                            listanDago(nori).setPuntuak(puntua);
+                        }
+
+                        else{
+
+                            BozkaketaAux bozkaketa;
+                            bozkaketa = new BozkaketaAux(nori, puntua);
+                            bozkatuLista.add(bozkaketa);
+                        }
+                    }
+                }
+        );
+    }
+
+
+    private BozkaketaAux listanDago (String noriHerria){
+        int i = 0;
+        while (i<bozkatuLista.size()) {
+            if (bozkatuLista.get(i).equals(noriHerria)){
+                return bozkatuLista.get(i);
+            }
+            i++;
+        }
+        return null;
+    }
+
+    private void sartuDB(){
+
+        int i = 0;
+        while (i<bozkatuLista.size()){
+            String nori = bozkatuLista.get(i).getHerrialdea();
+            Integer puntu = bozkatuLista.get(i).getPuntuak();
+
+            //behin botoak sartuta, nork nori eta zenbat puntu jarri dituen gordeko da
+            BozkaketaDBKud.getInstantzia().puntuakSartu(this.bozkatzaile, nori, puntu);
+
+            //guztia eginda dagoala, herrialde bakotzari irabizi duten puntuak gehitu behar dira
+            BozkaketaDBKud.getInstantzia().orezkaritzaAktualizatu(nori, puntu);
+
+            i++;
+        }
+
     }
 }

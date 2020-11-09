@@ -5,6 +5,7 @@ import ehu.isad.model.Herrialde;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -38,6 +39,7 @@ public class ErroreaKud implements Initializable {
     public void setTestua(){
 
         lblMezua.setText(this.herrialdea.getIzena() + "k jada banatu ditu bere puntuak.");
+        lblMezua.setAlignment(Pos.CENTER);
 
     }
 
