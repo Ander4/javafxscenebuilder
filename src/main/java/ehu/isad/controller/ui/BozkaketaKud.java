@@ -15,10 +15,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableCell;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.image.Image;
@@ -61,18 +58,19 @@ public class BozkaketaKud implements Kudeatzaile {
     @FXML
     private Button btnBozkatu;
 
+    @FXML
+    private Label lblTestua;
+
+    @FXML
+    private ImageView imageBandera;
+
+    @FXML
+    private ImageView imageLogo;
+
     private ObservableList<HerrialdeaBozkatu> herrialdeBozkatuak = FXCollections.observableArrayList();
 
     @FXML
     void onGorde(ActionEvent event) {
-
-//        if (emandakoPunt == 5) {
-//            mainApp.Top3Erakutsi();
-//        }else{
-//
-//            System.out.println("Ez dituzu 5 puntu banatu");
-//
-//        }
 
         int i = 0;
         int puntuak = 0;
@@ -110,9 +108,29 @@ public class BozkaketaKud implements Kudeatzaile {
 
     }
 
+    private void logoaEzarri(){
+
+        this.imageLogo.setImage(new Image("eurobisioa.png"));
+
+    }
+
+    public void banderaEzarri(){
+
+        this.imageBandera.setImage(new Image("banderak/"+bozkatzaile+".png"));
+
+    }
+
+   public void testuaEzarri(String nork){
+
+        this.lblTestua.setText(nork+"k honela nahi ditu\n"+
+                "bere puntuak banatu:");
+
+    }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
+        this.logoaEzarri();
         this.setHerrialdeBozkatuak();
 
         tblBoto.setEditable(true);
@@ -165,7 +183,6 @@ public class BozkaketaKud implements Kudeatzaile {
         tblBoto.setItems(herrialdeBozkatuak);
     }
 
-    ////////////////////////////////////////////////////////////////////////////////////////
     private void bozkaketa(String nork){
         puntuCol.setOnEditCommit(
                 t -> {
@@ -211,10 +228,8 @@ public class BozkaketaKud implements Kudeatzaile {
             String nori = bozkatuLista.get(i).getHerrialdea();
             Integer puntu = bozkatuLista.get(i).getPuntuak();
 
-            //behin botoak sartuta, nork nori eta zenbat puntu jarri dituen gordeko da
             BozkaketaDBKud.getInstantzia().puntuakSartu(this.bozkatzaile, nori, puntu);
 
-            //guztia eginda dagoala, herrialde bakotzari irabizi duten puntuak gehitu behar dira
             BozkaketaDBKud.getInstantzia().orezkaritzaAktualizatu(nori, puntu);
 
             i++;

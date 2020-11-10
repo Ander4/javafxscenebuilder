@@ -45,13 +45,11 @@ public class Main extends Application {
     stage.show();
   }
 
-  //private Parent kargatu(String fxml, )
-
   private void pantailakKargatu() throws IOException {
 
     FXMLLoader loaderKautotu = new FXMLLoader(getClass().getResource("/HasieraUI.fxml"));
     hasieraUI = (Parent) loaderKautotu.load();
-    sceneHasiera = new Scene(hasieraUI,600,450);
+    sceneHasiera = new Scene(hasieraUI,400,250);
     hasieraKud = loaderKautotu.getController();
     hasieraKud.setMainApp(this);
 
@@ -96,24 +94,31 @@ public class Main extends Application {
   }
 
   public void herrialdeakErakutsi() {
+    stage.setTitle("Informazioaren Eguneraketa");
     stage.setScene(sceneHerri);
     stage.show();
   }
 
   public void erroreaErakutsi() {
+    stage.setTitle(this.herrialdea.getIzena()+"ren inguruko informazioa");
     erroreakKud.setHerrialdea(this.herrialdea);
     erroreakKud.setTestua();
+    erroreakKud.banderaEzarri();
     stage.setScene(sceneErrore);
     stage.show();
   }
 
   public void bozkaketaErakutsi() {
+    stage.setTitle("Bozkaketa Panela");
     bozkaketaKud.setBozkatzailea(this.herrialdea.getIzena());
+    bozkaketaKud.banderaEzarri();
+    bozkaketaKud.testuaEzarri(this.herrialdea.getIzena());//ez dakit zergatik kudeatzaile barruan herrialdea null moduan artzen du testua egiterakona, baina kodea egiterakoan ondo doa
     stage.setScene(sceneBozkaketa);
     stage.show();
   }
 
   public void Top3Erakutsi() {
+    stage.setTitle("TOP 3");
     top3Kud.hasieratu();
     stage.setScene(sceneTop3);
     stage.show();

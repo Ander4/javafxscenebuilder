@@ -11,6 +11,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.util.StringConverter;
 
 import java.net.URL;
@@ -28,6 +31,9 @@ public class HerrialdeakKud implements Kudeatzaile {
 
   @FXML
   private Button OKbtn;
+
+  @FXML
+  private ImageView imageLogo;
 
   public void setMainApp(Main main) {
     this.mainApp = main;
@@ -63,6 +69,12 @@ public class HerrialdeakKud implements Kudeatzaile {
 
   }
 
+  private void logoaEzarri(){
+
+    this.imageLogo.setImage(new Image("eurobisioa.png"));
+
+  }
+
   @FXML
   public void onClick(ActionEvent actionEvent) throws SQLException {
 
@@ -82,6 +94,7 @@ public class HerrialdeakKud implements Kudeatzaile {
   @Override
   public void initialize(URL location, ResourceBundle resources) {
 
+    this.logoaEzarri();
     this.comboHasieratu();
 
   }

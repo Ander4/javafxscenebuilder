@@ -66,7 +66,7 @@ public class Top3Kud implements Kudeatzaile{
         List<Top3Herri> emaitza = Top3DBKud.getInstantzia().lortuTop3();
         String izena = emaitza.get(0).getIzena();
         int puntuak = emaitza.get(0).getPuntuGuztiak();
-        this.lblTOP1.setText(izena+"-"+puntuak);
+        this.lblTOP1.setText(izena+" - "+puntuak+" puntu");
 
     }
 
@@ -75,7 +75,7 @@ public class Top3Kud implements Kudeatzaile{
         List<Top3Herri> emaitza = Top3DBKud.getInstantzia().lortuTop3();
         String izena = emaitza.get(1).getIzena();
         int puntuak = emaitza.get(1).getPuntuGuztiak();
-        this.lblTOP2.setText(izena+"-"+puntuak);
+        this.lblTOP2.setText(izena+" - "+puntuak+" puntu");
 
     }
 
@@ -84,7 +84,7 @@ public class Top3Kud implements Kudeatzaile{
         List<Top3Herri> emaitza = Top3DBKud.getInstantzia().lortuTop3();
         String izena = emaitza.get(2).getIzena();
         int puntuak = emaitza.get(2).getPuntuGuztiak();
-        this.lblTOP3.setText(izena+"-"+puntuak);
+        this.lblTOP3.setText(izena+" - "+puntuak+" puntu");
 
 
     }

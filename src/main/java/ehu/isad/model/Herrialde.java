@@ -1,9 +1,11 @@
 package ehu.isad.model;
 
+import javafx.scene.image.Image;
+
 public class Herrialde {
 
     private String izena;
-    private String bandera;
+    private Image bandera;
     private String tv;
 
     public String getIzena() {
@@ -14,11 +16,11 @@ public class Herrialde {
         this.izena = izena;
     }
 
-    public String getBandera() {
+    public Image getBandera() {
         return bandera;
     }
 
-    public void setBandera(String bandera) {
+    public void setBandera(Image bandera) {
         this.bandera = bandera;
     }
 
@@ -32,7 +34,7 @@ public class Herrialde {
 
     public Herrialde(String izena, String bandera, String tv) {
         this.izena = izena;
-        this.bandera = bandera;
+        this.bandera = new Image("banderak/"+bandera+".png");
         this.tv = tv;
     }
 }

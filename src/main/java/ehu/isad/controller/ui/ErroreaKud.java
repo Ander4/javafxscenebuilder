@@ -9,6 +9,8 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -24,6 +26,12 @@ public class ErroreaKud implements Initializable {
 
     @FXML
     private Button OKbtn;
+
+    @FXML
+    private ImageView imageBandera;
+
+    @FXML
+    private ImageView imageLogo;
 
     public void setMainApp(Main main) {
         this.mainApp = main;
@@ -49,8 +57,22 @@ public class ErroreaKud implements Initializable {
 
     }
 
+    private void logoaEzarri(){
+
+        this.imageLogo.setImage(new Image("eurobisioa.png"));
+
+    }
+
+    public void banderaEzarri(){
+
+        this.imageBandera.setImage(this.herrialdea.getBandera());
+
+    }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
+        this.logoaEzarri();
 
     }
 }
